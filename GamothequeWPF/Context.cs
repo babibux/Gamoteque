@@ -1,4 +1,5 @@
 ﻿using GamothequeWPF.Model;
+using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,10 @@ namespace GamothequeWPF
         public Context(string databasePath) : base()
         {
             DatabasePath = databasePath;
+        }
+
+        public Context(DbContextOptions options) : base(options)
+        {
         }
 
         public string DatabasePath { get; }
