@@ -23,6 +23,22 @@ namespace GamothequeWPF
         public MainWindow()
         {
             InitializeComponent();
+            newGame();
+        }
+
+        public async void newGame()
+        {
+            var context = await Context.GetCurrent();
+            context.Add(new Model.Game()
+            {
+                Name = "FFX",
+                Done = true,
+
+            });
+
+            await context.SaveChangesAsync();
+            path.Text = context.DatabasePath;
+            jeu.Text = context.Game.Where(g => g.Done == true).First().Name;
         }
     }
 }

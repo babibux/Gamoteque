@@ -17,6 +17,7 @@ namespace GamothequeWPF
         {
             if (_context == null)
             {
+                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
                 _context = new Context(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "database.db"));
                 await _context.Database.MigrateAsync();
             }
@@ -45,7 +46,7 @@ namespace GamothequeWPF
         {
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.EnableSensitiveDataLogging();
-            optionsBuilder.UseSqlite($"Filename={Database}", x => x.SuppressForeignKeyEnforcement());
+            optionsBuilder.UseSqlite($"Filename={DatabasePath}", x => x.SuppressForeignKeyEnforcement());
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
