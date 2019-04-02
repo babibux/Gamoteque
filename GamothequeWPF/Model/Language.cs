@@ -8,11 +8,9 @@ using System.Threading.Tasks;
 
 namespace GamothequeWPF.Model
 {
-    class Type
+    public class Language
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        public int Name { get; set; }
-
+        [Key]
+        public string Name { get; set; }
     }
 }

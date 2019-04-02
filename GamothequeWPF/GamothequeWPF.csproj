@@ -180,8 +180,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\20190402093352_Initial.cs" />
+    <Compile Include="Migrations\20190402093352_Initial.designer.cs">
+      <DependentUpon>20190402093352_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\ContextModelSnapshot.cs" />
     <Compile Include="Model\Game.cs" />
+    <Compile Include="Model\GameTextLanguage.cs" />
     <Compile Include="Model\GameType.cs" />
+    <Compile Include="Model\GameVoiceLanguage.cs" />
+    <Compile Include="Model\Language.cs" />
     <Compile Include="Model\Type.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

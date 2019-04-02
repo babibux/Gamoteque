@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace GamothequeWPF.Model
 {
-    class GameType
+    public class GameVoiceLanguage
     {
         [Key]
-        public int IdType { get; set; }
-        [Key]
         public int IdGame { get; set; }
-
-        [ForeignKey(nameof(IdType))]
-        public Type Type { get; set; }
+        [Key]
+        public string NameLanguage { get; set; }
 
         [ForeignKey(nameof(IdGame))]
         public Game Game { get; set; }
+
+        [ForeignKey(nameof(NameLanguage))]
+        public Language Language { get; set; }
     }
 }

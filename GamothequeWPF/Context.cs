@@ -35,12 +35,27 @@ namespace GamothequeWPF
 
         public string DatabasePath { get; }
         public DbSet<Game> Game { get; set; }
+        public DbSet<Model.Type> Type { get; set; }
+        public DbSet<GameType> GameType { get; set; }
+        public DbSet<GameVoiceLanguage> GameVoiceLanguage { get; set; }
+        public DbSet<GameTextLanguage> GameTextLanguage { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.EnableSensitiveDataLogging();
             optionsBuilder.UseSqlite($"Filename={Database}", x => x.SuppressForeignKeyEnforcement());
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<GameType>()
+                .HasKey(gt => new { gt.IdGame, gt.IdType });
+            modelBuilder.Entity<GameVoiceLanguage>()
+                .HasKey(gvl => new { gvl.IdGame, gvl.NameLanguage });
+            modelBuilder.Entity<GameTextLanguage>()
+                .HasKey(gtl => new { gtl.IdGame, gtl.NameLanguage });
         }
     }
 }

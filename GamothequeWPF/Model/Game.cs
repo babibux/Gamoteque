@@ -21,11 +21,12 @@ namespace GamothequeWPF.Model
         public bool PhysicalSupport { get; set; }
         public bool DigitalSupport { get; set; }
         public string Picture { get; set; }
-        public Enum OriginalLanguage { get; set; }
-        public Enum Language { get; set; }
-        public Enum Subtitles { get; set; }
+        //public Language VoiceLanguage { get; set; }
+        //public Language TextLanguage { get; set; }
         public TimeSpan ExpectedDuration { get; set; }
         public DateTime ReleaseDate { get; set; }
+
+        //[InverseProperty]     
 
     }
 }
