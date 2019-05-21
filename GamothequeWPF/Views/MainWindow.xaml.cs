@@ -10,13 +10,12 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GamothequeWPF
+namespace GamothequeWPF.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -24,7 +23,5 @@ namespace GamothequeWPF
         {
             InitializeComponent();
         }
-
-
     }
 }
