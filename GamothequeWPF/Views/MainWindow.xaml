@@ -20,7 +20,11 @@
         </Grid>
 
         <Grid Grid.Row="3">
-            <ItemsControl ItemsSource = "{Binding Path = AllGames, Mode=OneWay}" Margin="10,60,-10,-33">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="13*"/>
+                <ColumnDefinition Width="75*"/>
+            </Grid.ColumnDefinitions>
+            <ItemsControl ItemsSource = "{Binding Path = AllGames, Mode=OneWay}" Margin="10,60,-10,-33" Grid.ColumnSpan="2">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation = "Horizontal">

@@ -12,7 +12,7 @@ namespace GamothequeWPF.ViewModel
     class MainWindowViewModel : BaseNotifyPropertyChanged
     {
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        Game updatedGame;
 
         public MainWindowViewModel()
         {
@@ -83,7 +83,6 @@ namespace GamothequeWPF.ViewModel
             await context.SaveChangesAsync();
             getAllGames();
         }
-
 
     }
 }
