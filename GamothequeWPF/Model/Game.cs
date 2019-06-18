@@ -26,7 +26,8 @@ namespace GamothequeWPF.Model
         public TimeSpan ExpectedDuration { get; set; }
         public DateTime ReleaseDate { get; set; }
 
-        //[InverseProperty]     
+        [InverseProperty("Game")]
+        public ICollection<GameType> gameTypes { get; set; }
 
     }
 }

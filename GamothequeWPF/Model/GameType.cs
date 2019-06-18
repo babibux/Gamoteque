@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GamothequeWPF.Model
 {
-    class GameType
+    public class GameType
     {
         [Key]
         public int IdType { get; set; }
