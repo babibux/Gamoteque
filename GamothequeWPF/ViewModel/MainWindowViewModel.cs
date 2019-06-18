@@ -1,4 +1,5 @@
 ﻿using GamothequeWPF.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,11 +24,39 @@ namespace GamothequeWPF.ViewModel
 
         public ObservableCollection<Game> AllGames
         {
-            get {
+            get
+            {
                 return (ObservableCollection<Game>)GetProperty();
             }
 
-            set {
+            set
+            {
+                SetProperty(value);
+            }
+        }
+
+        public ObservableCollection<Model.Type> AllTypes
+        {
+            get
+            {
+                return (ObservableCollection<Model.Type>)GetProperty();
+            }
+
+            set
+            {
+                SetProperty(value);
+            }
+        }
+
+        public ObservableCollection<Game> FilteredGames
+        {
+            get
+            {
+                return (ObservableCollection<Game>)GetProperty();
+            }
+
+            set
+            {
                 SetProperty(value);
             }
         }
@@ -46,13 +75,28 @@ namespace GamothequeWPF.ViewModel
             //path.Text = context.DatabasePath;
             //jeu.Text = context.Game.Where(g => g.Done == true).First().Name;
             var context = await Context.GetCurrent();
-            AllGames = new ObservableCollection<Game>(context.Game.ToList());
+            AllGames = new ObservableCollection<Game>(context.Game.Include(t => t.gameTypes).ThenInclude(t => t.Type).ToList());
+            AllTypes = new ObservableCollection<Model.Type>(context.Type.Include(t => t.gameTypes).ThenInclude(g => g.Game).ToList());
+            FilteredGames = AllGames;
+        }
 
+        public void getGamesByType(Model.Type typeFilter)
+        {
+            AllGames = new ObservableCollection<Game>();
+
+            foreach (GameType gameType in typeFilter.gameTypes)
+            {
+                AllGames.Add(gameType.Game);
+            }
+
+           
         }
 
         public Commandes.BaseCommand NewGame => new Commandes.BaseCommand(newGame);
 
         public Commandes.BaseCommand<int> DeleteGame => new Commandes.BaseCommand<int>(deleteGame);
+
+        public Commandes.BaseCommand<Model.Type> GetGamesByType => new Commandes.BaseCommand<Model.Type>(getGamesByType);
 
         public string NameNewGame {
             get;

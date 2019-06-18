@@ -40,6 +40,7 @@ namespace GamothequeWPF
         public DbSet<GameType> GameType { get; set; }
         public DbSet<GameVoiceLanguage> GameVoiceLanguage { get; set; }
         public DbSet<GameTextLanguage> GameTextLanguage { get; set; }
+        public DbSet<Language> Languages { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
