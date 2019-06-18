@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace GamothequeWPF.ViewModel
 {
-    class GameListViewModel : BaseNotifyPropertyChanged
+    class MainWindowViewModel : BaseNotifyPropertyChanged
     {
 
         Game updatedGame;
 
-        public GameListViewModel()
+        public MainWindowViewModel()
         {
             getAllGames();
         }
