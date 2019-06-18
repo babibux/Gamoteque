@@ -43,6 +43,8 @@
         </ScrollViewer>
 
         <Grid Grid.ColumnSpan="2" Margin="150,0,0,0">
+            <Frame Source="GameDetailsView.xaml">
+            </Frame>
         </Grid>
         
     </Grid>

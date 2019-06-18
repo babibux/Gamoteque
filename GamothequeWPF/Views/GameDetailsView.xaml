@@ -4,18 +4,80 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:GamothequeWPF.Views"
+      xmlns:vm="clr-namespace:GamothequeWPF.ViewModel"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="GameDetailsView">
-
+      Title="GameDetailsView"
+      Background="White">
+    
+    <Page.DataContext>
+        <vm:GameDetailsViewModel/>
+    </Page.DataContext>
     <Grid>
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="1">
-                    <Label />
+                <Label Content="Nom du jeu"/>
+                <Grid Grid.Row="2">
+                    <TextBox Text="Test"/>
+                </Grid>
+                <Grid Grid.Row="3">
+                    <Label Content="Jeu fait"/>
+                </Grid>
+                <Grid Grid.Row="4">
+                    <CheckBox />
+                </Grid>
+                <Grid Grid.Row="5">
+                    <Label Content="Synopsys"/>
+                </Grid>
+                <Grid Grid.Row="6">
+                    <TextBox Text="C'est un mec qui rentre dans un bar..."/>
+                </Grid>
+                <Grid Grid.Row="7">
+                    <Label Content="Avis"/>
+                </Grid>
+                <Grid Grid.Row="8">
+                    <TextBox Text="Trop de la boulette !"/>
+                </Grid>
+                <Grid Grid.Row="9">
+                    <Label Content="Note"/>
+                </Grid>
+                <Grid Grid.Row="10">
+                    <ComboBox Text="Choisir une note...">
+                        <ComboBoxItem>1</ComboBoxItem>
+                        <ComboBoxItem>2</ComboBoxItem>
+                        <ComboBoxItem>3</ComboBoxItem>
+                        <ComboBoxItem>4</ComboBoxItem>
+                        <ComboBoxItem>5</ComboBoxItem>
+                    </ComboBox>
+                </Grid>
+                <Grid Grid.Row="11">
+                    <Label Content="Genre"/>
+                </Grid>
+                <Grid Grid.Row="12">
+                    <ComboBox Text="Choisir un type...">
+                        <ItemsControl ItemsSource = "{Binding Path = TypeList, Mode=OneWay}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <ComboBoxItem Content="{Binding Path=Name}"></ComboBoxItem>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ComboBox>
                 </Grid>
             </Grid>
         </ScrollViewer>

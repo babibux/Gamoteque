@@ -173,6 +173,7 @@
     <Compile Include="Context.cs" />
     <Compile Include="ContextFactory.cs" />
     <Compile Include="ViewModel\BaseNotifyPropertyChanged.cs" />
+    <Compile Include="ViewModel\GameDetailsViewModel.cs" />
     <Compile Include="ViewModel\GameListViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="Views\GameListView.xaml.cs">
