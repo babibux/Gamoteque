@@ -32,6 +32,19 @@ namespace GamothequeWPF.ViewModel
             }
         }
 
+        public ObservableCollection<Model.Type> TypeList
+        {
+            get
+            {
+                return (ObservableCollection<Model.Type>)GetProperty();
+            }
+
+            set
+            {
+                SetProperty(value);
+            }
+        }
+
         public async void getAllGames()
         {
             //var context = await Context.GetCurrent();
@@ -47,7 +60,7 @@ namespace GamothequeWPF.ViewModel
             //jeu.Text = context.Game.Where(g => g.Done == true).First().Name;
             var context = await Context.GetCurrent();
             AllGames = new ObservableCollection<Game>(context.Game.ToList());
-
+            TypeList = new ObservableCollection<Model.Type>(context.Type.ToList());
         }
 
         public Commandes.BaseCommand NewGame => new Commandes.BaseCommand(newGame);
