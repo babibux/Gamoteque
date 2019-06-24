@@ -14,6 +14,19 @@ namespace GamothequeWPF.ViewModel
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public string PageView
+        {
+            get
+            {
+                return (String)GetProperty();
+            }
+
+            set
+            {
+                SetProperty(value);
+            }
+        }
+
         public MainWindowViewModel()
         {
             getAllGames();
@@ -67,6 +80,8 @@ namespace GamothequeWPF.ViewModel
 
         public Commandes.BaseCommand<int> DeleteGame => new Commandes.BaseCommand<int>(deleteGame);
 
+        public Commandes.BaseCommand<string> ChangePage => new Commandes.BaseCommand<string>(changePage);
+
         public string NameNewGame {
             get;
             set;
@@ -75,6 +90,21 @@ namespace GamothequeWPF.ViewModel
         {
             get; set;
         }
+
+        public void changePage(string page)
+        {
+            switch(page)
+            {
+                case "NewGame":
+                    PageView = "GameDetailsView.xaml";
+                    break;
+                case "GameList":
+                    PageView = "GameListView.xaml";
+                    break;
+            }
+        }
+
+        
 
         public async void newGame()
         {

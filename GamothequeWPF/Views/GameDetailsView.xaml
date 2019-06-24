@@ -15,7 +15,7 @@
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="1">
-                    <Label />
+                    <TextBox Text="New game"></TextBox>
                 </Grid>
             </Grid>
         </ScrollViewer>

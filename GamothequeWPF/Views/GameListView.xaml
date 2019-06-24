@@ -1,4 +1,4 @@
-﻿<Window x:Class="GamothequeWPF.Views.GameListView"
+﻿<Page x:Class="GamothequeWPF.Views.GameListView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,9 +7,9 @@
         xmlns:vm="clr-namespace:GamothequeWPF.ViewModel"
         mc:Ignorable="d"
         Title="GameListView" Height="450" Width="800">
-    <Window.DataContext>
+    <Page.DataContext>
         <vm:GameListViewModel/>
-    </Window.DataContext>
+    </Page.DataContext>
 
     <Grid>
         <TextBlock Grid.Row="1">Liste des médias</TextBlock>
@@ -56,4 +56,4 @@
         <!--<TextBox x:Name="jeu" Text="{Binding Path= }"></TextBox>
         <TextBox x:Name="path" Margin="0,29,0,0"></TextBox>-->
     </Grid>
-</Window>
+</Page>
