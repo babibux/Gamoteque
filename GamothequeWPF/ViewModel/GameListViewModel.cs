@@ -14,10 +14,12 @@ namespace GamothequeWPF.ViewModel
     {
 
         Game updatedGame;
+        
 
         public GameListViewModel()
         {
             getAllGames();
+            SortList = new ObservableCollection<string> { "Id", "Name", "Mark", "Done" };
         }
 
         //private ObservableCollection<Game> _allgames;
@@ -61,6 +63,44 @@ namespace GamothequeWPF.ViewModel
             }
         }
 
+        public ObservableCollection<string> SortList
+        {
+            get
+            {
+                return (ObservableCollection<string>)GetProperty();
+            }
+
+            set
+            {
+                SetProperty(value);
+            }
+        }
+
+        public string SelectedSortItem
+        {
+            get
+            {
+                return (string)GetProperty();
+            }
+
+            set
+            {
+                sortGame(value, true);
+                SetProperty(value);
+            }
+        }
+
+        public string NameNewGame
+        {
+            get;
+            set;
+        }
+        public bool FinishedNewGame
+        {
+            get; set;
+        }
+
+
         public async void getAllGames()
         {
             //var context = await Context.GetCurrent();
@@ -80,13 +120,31 @@ namespace GamothequeWPF.ViewModel
             FilteredGames = AllGames;
         }
 
+        public void sortGame(string sort, bool asc)
+        {
+            var sortType = typeof(Game).GetProperty(sort);
+            if (sortType != null)
+            {
+                if (asc)
+                {
+                    FilteredGames = new ObservableCollection<Game>(FilteredGames.OrderBy(g => sortType.GetValue(g, null)));
+                }
+                else
+                {
+                    FilteredGames = new ObservableCollection<Game>(FilteredGames.OrderByDescending(g => sortType.GetValue(g, null)));
+                }
+            }
+            
+            
+        }
+
         public void getGamesByType(Model.Type typeFilter)
         {
-            AllGames = new ObservableCollection<Game>();
+            FilteredGames = new ObservableCollection<Game>();
 
             foreach (GameType gameType in typeFilter.gameTypes)
             {
-                AllGames.Add(gameType.Game);
+                FilteredGames.Add(gameType.Game);
             }
 
            
@@ -98,14 +156,7 @@ namespace GamothequeWPF.ViewModel
 
         public Commandes.BaseCommand<Model.Type> GetGamesByType => new Commandes.BaseCommand<Model.Type>(getGamesByType);
 
-        public string NameNewGame {
-            get;
-            set;
-        }
-        public bool FinishedNewGame
-        {
-            get; set;
-        }
+        public Commandes.BaseCommand<string,bool> SortGame => new Commandes.BaseCommand<string,bool>(sortGame);
 
         public async void newGame()
         {

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GamothequeWPF"
         xmlns:vm="clr-namespace:GamothequeWPF.ViewModel"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         Title="GameListView" Height="450" Width="800">
     <Page.DataContext>
@@ -13,6 +14,10 @@
 
     <Grid>
         <TextBlock Grid.Row="1">Liste des médias</TextBlock>
+        <StackPanel>
+            <ComboBox SelectedItem="{Binding SelectedSortItem}" ItemsSource="{Binding Path= SortList}"></ComboBox>
+        </StackPanel>
+        
 
         <Grid>
             <TextBlock Text = "Titre" Width = "100" Margin = "119,40,573,-30"/>
@@ -24,7 +29,7 @@
                 <ColumnDefinition Width="13*"/>
                 <ColumnDefinition Width="75*"/>
             </Grid.ColumnDefinitions>
-            <ItemsControl ItemsSource = "{Binding Path = AllGames, Mode=OneWay}" Margin="10,60,-10,-33" Grid.ColumnSpan="2">
+            <ItemsControl ItemsSource = "{Binding Path = FilteredGames, Mode=OneWay}" Margin="10,60,-10,-33" Grid.ColumnSpan="2">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation = "Horizontal">
@@ -35,7 +40,7 @@
                             <ItemsControl ItemsSource="{Binding Path= gameTypes, Mode=Oneway}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <Button Content="{Binding Path=Type.Name}" Command="{Binding DataContext.GetGamesByType, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" CommandParameter="{Binding Path=Type}"></Button>
+                                        <Button Content="{Binding Path=Type.Name}" Command="{Binding DataContext.GetGamesByType, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}" CommandParameter="{Binding Path=Type}"></Button>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
