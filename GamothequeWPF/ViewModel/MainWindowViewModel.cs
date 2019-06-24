@@ -101,6 +101,9 @@ namespace GamothequeWPF.ViewModel
                 case "GameList":
                     PageView = "GameListView.xaml";
                     break;
+                case "Statistic":
+                    PageView = "StatisticView.xaml";
+                    break;
             }
         }
 
