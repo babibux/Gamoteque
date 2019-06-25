@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:GamothequeWPF"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
-         
+        <BooleanToVisibilityConverter x:Key="VisibleIfTrueConverter" />
     </Application.Resources>
 </Application>

@@ -15,6 +15,8 @@ namespace GamothequeWPF.ViewModel
         public StatisticViewModel()
         {
             AllStats = new ObservableCollection<string>();
+            GameByMarkStats = new ObservableCollection<KeyValuePair<string, int>>();
+            GameByTypeStats = new ObservableCollection<KeyValuePair<string, int>>();
             getAllStats();
         }
 
@@ -23,6 +25,32 @@ namespace GamothequeWPF.ViewModel
             get
             {
                 return (ObservableCollection<string>)GetProperty();
+            }
+
+            set
+            {
+                SetProperty(value);
+            }
+        }
+
+        public ObservableCollection<KeyValuePair<string, int>> GameByMarkStats
+        {
+            get
+            {
+                return (ObservableCollection<KeyValuePair<string, int>>)GetProperty();
+            }
+
+            set
+            {
+                SetProperty(value);
+            }
+        }
+
+        public ObservableCollection<KeyValuePair<string, int>> GameByTypeStats
+        {
+            get
+            {
+                return (ObservableCollection<KeyValuePair<string, int>>)GetProperty();
             }
 
             set
@@ -43,13 +71,23 @@ namespace GamothequeWPF.ViewModel
             // Répartition des jeux par note
             for (var i = 0; i < 6; i++)
             {
-                AllStats.Add("Nombre de jeu " + i + " étoile" + ((i > 1) ? "s" : "")  + " : " + games.Where(g => g.Mark == i).Count());
+                GameByMarkStats.Add(new KeyValuePair<string, int>(i.ToString(), games.Where(g => g.Mark == i).Count()));
+
+                //AllStats.Add("Nombre de jeu " + i + " étoile" + ((i > 1) ? "s" : "")  + " : " + games.Where(g => g.Mark == i).Count());
             }
 
             // Nombre de jeux de chaques types
             foreach (Model.Type typ in context.Type.Include(t => t.gameTypes))
             {
-                AllStats.Add("Nombre de " + typ.Name + " : " + typ.gameTypes.Count());
+                int nbGame = typ.gameTypes.Count();
+                if (nbGame > 0 )
+                {
+                    GameByTypeStats.Add(new KeyValuePair<string, int>(typ.Name, typ.gameTypes.Count()));
+                }
+                
+                        
+                        
+                 //AllStats.Add("Nombre de " + typ.Name + " : " + typ.gameTypes.Count());
             }
         }
 

@@ -115,8 +115,12 @@ namespace GamothequeWPF.ViewModel
             //path.Text = context.DatabasePath;
             //jeu.Text = context.Game.Where(g => g.Done == true).First().Name;
             var context = await Context.GetCurrent();
-            AllGames = new ObservableCollection<Game>(context.Game.Include(t => t.gameTypes).ThenInclude(t => t.Type).ToList());
-            AllTypes = new ObservableCollection<Model.Type>(context.Type.Include(t => t.gameTypes).ThenInclude(g => g.Game).ToList());
+            if (AllGames == null)
+            {
+                AllGames = new ObservableCollection<Game>(context.Game.Include(t => t.gameTypes).ThenInclude(t => t.Type).ToList());
+                AllTypes = new ObservableCollection<Model.Type>(context.Type.Include(t => t.gameTypes).ThenInclude(g => g.Game).ToList());
+            }
+
             FilteredGames = AllGames;
         }
 
@@ -157,6 +161,8 @@ namespace GamothequeWPF.ViewModel
         public Commandes.BaseCommand<Model.Type> GetGamesByType => new Commandes.BaseCommand<Model.Type>(getGamesByType);
 
         public Commandes.BaseCommand<string,bool> SortGame => new Commandes.BaseCommand<string,bool>(sortGame);
+
+        public Commandes.BaseCommand GetAllGames => new Commandes.BaseCommand (getAllGames);
 
         public async void newGame()
         {

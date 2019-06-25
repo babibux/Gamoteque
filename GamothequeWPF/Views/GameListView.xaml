@@ -5,55 +5,88 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:GamothequeWPF.ViewModel"
         mc:Ignorable="d"
-        Title="GameListView" Height="450" Width="800">
+        Title="GameListView" ShowsNavigationUI="False">
     <Page.DataContext>
         <vm:GameListViewModel/>
     </Page.DataContext>
 
     <Grid>
-        <TextBlock Grid.Row="1">Liste des médias</TextBlock>
-        <StackPanel>
-            <ComboBox SelectedItem="{Binding SelectedSortItem}" ItemsSource="{Binding Path= SortList}"></ComboBox>
-        </StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+
+        <!--Boutons des filtres par type-->
+            <Grid> 
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+            
+                <Grid>
+                    <Button Command="{Binding GetAllGames}" CommandParameter="GameList">-- Tous --</Button>
+                </Grid>
+            
+                <Grid Grid.Row="2">
+                    <ItemsControl ItemsSource = "{Binding Path=AllTypes, Mode=OneWay}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button Content="{Binding Path=Name}" Command="{Binding DataContext.GetGamesByType, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}" CommandParameter="{Binding}"></Button>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
+            </Grid>
+        <!-- /Boutons des filtres par type-->
         
+        
+        
+        <Grid Grid.Column="2">
+            <TextBlock Grid.Row="1">Liste des médias</TextBlock>
+            <StackPanel>
+                <ComboBox SelectedItem="{Binding SelectedSortItem}" ItemsSource="{Binding Path= SortList}"></ComboBox>
+            </StackPanel>
 
-        <Grid>
-            <TextBlock Text = "Titre" Width = "100" Margin = "119,40,573,-30"/>
-            <TextBlock Text = "Terminer" Width = "100" Margin = "224,40,468,360"/>
-        </Grid>
 
-        <Grid Grid.Row="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="13*"/>
-                <ColumnDefinition Width="75*"/>
-            </Grid.ColumnDefinitions>
-            <ItemsControl ItemsSource = "{Binding Path = FilteredGames, Mode=OneWay}" Margin="10,60,-10,-33" Grid.ColumnSpan="2">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation = "Horizontal">
-                            <TextBlock Text = "{Binding Path = Id}" Width = "100" Margin = "3 5 3 5"/>
-                            <TextBlock Text = "{Binding Path = Name}" Width = "100" Margin = "3 5 3 5"/>
-                            <CheckBox IsEnabled="False" IsChecked = "{Binding Path = Done}" Width = "100" Margin = "0 5 3 5"/>
-                            <Button Command="{Binding DataContext.DeleteGame, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding Path=Id}">[|||]</Button>
-                            <ItemsControl ItemsSource="{Binding Path= gameTypes, Mode=Oneway}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <Button Content="{Binding Path=Type.Name}" Command="{Binding DataContext.GetGamesByType, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}" CommandParameter="{Binding Path=Type}"></Button>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
+            <Grid>
+                <TextBlock Text = "Titre" Width = "100" Margin = "119,40,573,-30"/>
+                <TextBlock Text = "Terminer" Width = "100" Margin = "224,40,468,360"/>
+            </Grid>
+
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="13*"/>
+                    <ColumnDefinition Width="75*"/>
+                </Grid.ColumnDefinitions>
+                <ItemsControl ItemsSource = "{Binding Path = FilteredGames, Mode=OneWay}" Margin="10,60,-10,-33" Grid.ColumnSpan="2">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation = "Horizontal">
+                                <TextBlock Text = "{Binding Path = Id}" Width = "100" Margin = "3 5 3 5"/>
+                                <TextBlock Text = "{Binding Path = Name}" Width = "100" Margin = "3 5 3 5"/>
+                                <CheckBox IsEnabled="False" IsChecked = "{Binding Path = Done}" Width = "100" Margin = "0 5 3 5"/>
+                                <Button Command="{Binding DataContext.DeleteGame, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding Path=Id}">[|||]</Button>
+                                <ItemsControl ItemsSource="{Binding Path= gameTypes, Mode=Oneway}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Button Content="{Binding Path=Type.Name}" Command="{Binding DataContext.GetGamesByType, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}" CommandParameter="{Binding Path=Type}"></Button>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
                                 <!--<Button></Button>-->
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+
+            <Grid Margin="654,389,0,0">
+                <TextBox Margin="-646,-10,646,10" Text="{Binding Path= NameNewGame}"></TextBox>
+                <CheckBox Margin="-491,-10,491,10" IsChecked="{Binding Path= FinishedNewGame}"></CheckBox>
+                <Button Content="Ajouter" Command="{Binding Path=NewGame}" Margin="-452,-10,452,10"/>
+            </Grid>
         </Grid>
 
-        <Grid Margin="654,389,0,0">
-            <TextBox Margin="-646,-10,646,10" Text="{Binding Path= NameNewGame}"></TextBox>
-            <CheckBox Margin="-491,-10,491,10" IsChecked="{Binding Path= FinishedNewGame}"></CheckBox>
-            <Button Content="Ajouter" Command="{Binding Path=NewGame}" Margin="-452,-10,452,10"/>
-        </Grid>
 
 
         <!--<TextBox x:Name="jeu" Text="{Binding Path= }"></TextBox>

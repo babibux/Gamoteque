@@ -6,16 +6,19 @@
         xmlns:local="clr-namespace:GamothequeWPF"
         xmlns:vm="clr-namespace:GamothequeWPF.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow">
 
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
+    
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150px" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Name="menuWidth"  Width="150px" />
+            <ColumnDefinition Width="25px" />
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <Grid>
                 <Grid.RowDefinitions>
@@ -25,32 +28,47 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
-
-                <Button Command="{Binding ChangePage}" CommandParameter="NewGame">Ajouter un jeu</Button>
-                
-                <GridSplitter ResizeDirection="Rows" Grid.Row="1" Height="5" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0"/>
-                <Grid Grid.Row="3">
-                    <Button Command="{Binding ChangePage}" CommandParameter="GameList">-- Tous --</Button>
-                </Grid>
-                <Grid Grid.Row="4">
-                    <ItemsControl ItemsSource = "{Binding Path = TypeList, Mode=OneWay}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Button Content = "{Binding Path = Name}"></Button>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </Grid>
-
+                <!--<GridSplitter ResizeDirection="Rows" Grid.Row="1" Height="5" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0"/>-->
                 <Button Grid.Row="2" Command="{Binding ChangePage}" CommandParameter="Statistic">Statistique</Button>
+                <Button Grid.Row="3" Command="{Binding ChangePage}" CommandParameter="GameList">Liste des jeux</Button>
+                <Button Grid.Row="4" Command="{Binding ChangePage}" CommandParameter="NewGame">Ajouter un jeu</Button>
             </Grid>
         </ScrollViewer>
 
-        <Grid Grid.ColumnSpan="2" Margin="150,0,0,0">
+        <Grid Grid.Column="2">
             <Frame Source="{Binding Path=PageView, Mode=TwoWay}">
                 
             </Frame>
         </Grid>
-        
+        <Button FontFamily="Marlett" FontSize="20" Content="3" Visibility="{Binding HideMenuButton}" Command="{Binding ChangeShowMenuButton}" Height="25" Width="25" Grid.Column="1">
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="Button.Click">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                    Storyboard.TargetName="menuWidth"
+                                    Storyboard.TargetProperty="MaxWidth"
+                                    From="150" To="0" Duration="0:0:1" 
+                                    AutoReverse="False" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Button.Triggers>
+        </Button>
+        <Button FontFamily="Marlett" FontSize="20" Content="4" Visibility="{Binding Path=ShowMenuButton, Converter={StaticResource VisibleIfTrueConverter} }" Command="{Binding ChangeShowMenuButton}" Height="25" Width="25" Grid.Column="1">
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="Button.Click">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                    Storyboard.TargetName="menuWidth"
+                                    Storyboard.TargetProperty="MaxWidth"
+                                    From="0" To="150" Duration="0:0:1" 
+                                    AutoReverse="False" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Button.Triggers>
+        </Button>
     </Grid>
 </Window>

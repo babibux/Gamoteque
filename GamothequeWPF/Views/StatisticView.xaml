@@ -5,13 +5,23 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:GamothequeWPF.Views"
       xmlns:vm="clr-namespace:GamothequeWPF.ViewModel"
+      xmlns:DV="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"  
+       xmlns:DVC="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="StatisticView" Background="White">
+      Title="StatisticView" Background="White" ShowsNavigationUI="False">
     <Page.DataContext>
         <vm:StatisticViewModel/>
     </Page.DataContext>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
         <ItemsControl ItemsSource = "{Binding Path = AllStats, Mode=OneWay}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
@@ -19,5 +29,17 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+        <DVC:Chart Grid.Row="2">
+            <DVC:Chart.Series>
+                <DVC:BarSeries  ItemsSource="{Binding GameByMarkStats}" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}">
+                </DVC:BarSeries>
+            </DVC:Chart.Series>
+        </DVC:Chart>
+        <DVC:Chart Grid.Row="2" Grid.Column="2">
+            <DVC:Chart.Series>
+                <DVC:BarSeries  ItemsSource="{Binding GameByTypeStats}" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}">
+                </DVC:BarSeries>
+            </DVC:Chart.Series>
+        </DVC:Chart>
     </Grid>
 </Page>

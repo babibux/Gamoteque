@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace GamothequeWPF.ViewModel
 {
@@ -14,22 +15,11 @@ namespace GamothequeWPF.ViewModel
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public string PageView
-        {
-            get
-            {
-                return (String)GetProperty();
-            }
-
-            set
-            {
-                SetProperty(value);
-            }
-        }
-
         public MainWindowViewModel()
         {
             getAllGames();
+            HideMenuButton = false;
+            ShowMenuButton = false;
         }
 
         //private ObservableCollection<Game> _allgames;
@@ -41,6 +31,45 @@ namespace GamothequeWPF.ViewModel
             }
 
             set {
+                SetProperty(value);
+            }
+        }
+
+        public bool? ShowMenuButton
+        {
+            get
+            {
+                return (bool?)GetProperty();
+            }
+
+            set
+            {
+                SetProperty(value);
+            }
+        }
+
+        public bool? HideMenuButton
+        {
+            get
+            {
+                return (bool?)GetProperty();
+            }
+
+            set
+            {
+                SetProperty(value);
+            }
+        }
+
+        public string PageView
+        {
+            get
+            {
+                return (string)GetProperty();
+            }
+
+            set
+            {
                 SetProperty(value);
             }
         }
@@ -76,12 +105,22 @@ namespace GamothequeWPF.ViewModel
             TypeList = new ObservableCollection<Model.Type>(context.Type.ToList());
         }
 
+        public void changeShowMenuButton()
+        {
+            HideMenuButton = !HideMenuButton;
+            ShowMenuButton = !ShowMenuButton;
+        }
+
         public Commandes.BaseCommand NewGame => new Commandes.BaseCommand(newGame);
 
         public Commandes.BaseCommand<int> DeleteGame => new Commandes.BaseCommand<int>(deleteGame);
 
         public Commandes.BaseCommand<string> ChangePage => new Commandes.BaseCommand<string>(changePage);
 
+        public Commandes.BaseCommand ChangeShowMenuButton => new Commandes.BaseCommand (changeShowMenuButton);
+
+
+        
         public string NameNewGame {
             get;
             set;
