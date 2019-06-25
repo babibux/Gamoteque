@@ -30,33 +30,65 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
-                <Label Content="Nom du jeu"/>
+                <!--<Image JeSaisPasQuoiMettre="{Binding Path=Picture}" />-->
                 <Grid Grid.Row="2">
-                    <TextBox Text="Test"/>
+                    <Label Content="Nom du jeu"/>
                 </Grid>
                 <Grid Grid.Row="3">
-                    <Label Content="Jeu fait"/>
+                    <TextBox Text="{Binding Path=Name}"/>
                 </Grid>
                 <Grid Grid.Row="4">
-                    <CheckBox />
+                    <Label Content="Jeu fait"/>
                 </Grid>
                 <Grid Grid.Row="5">
-                    <Label Content="Synopsys"/>
+                    <CheckBox Content="{Binding Path=Done}"/>
                 </Grid>
                 <Grid Grid.Row="6">
-                    <TextBox Text="C'est un mec qui rentre dans un bar..."/>
+                    <Label Content="Synopsis"/>
                 </Grid>
                 <Grid Grid.Row="7">
-                    <Label Content="Avis"/>
+                    <TextBox Text="{Binding Path=Synopsis}"/>
                 </Grid>
                 <Grid Grid.Row="8">
-                    <TextBox Text="Trop de la boulette !"/>
+                    <Label Content="PEGI"/>
                 </Grid>
                 <Grid Grid.Row="9">
-                    <Label Content="Note"/>
+                    <TextBox Text="{Binding Path=MinimumAge}"/>
                 </Grid>
                 <Grid Grid.Row="10">
+                    <Label Content="Support physique"/>
+                </Grid>
+                <Grid Grid.Row="11">
+                    <CheckBox Content="{Binding Path=PhysicalSupport}"/>
+                </Grid>
+                <Grid Grid.Row="12">
+                    <Label Content="Support numérique"/>
+                </Grid>
+                <Grid Grid.Row="13">
+                    <CheckBox Content="{Binding Path=DigitalSupport}"/>
+                </Grid>
+                <Grid Grid.Row="14">
+                    <Label Content="Avis"/>
+                </Grid>
+                <Grid Grid.Row="15">
+                    <TextBox Text="{Binding Path=Review}"/>
+                </Grid>
+                <Grid Grid.Row="16">
+                    <Label Content="Note"/>
+                </Grid>
+                <Grid Grid.Row="17">
                     <ComboBox Text="Choisir une note...">
                         <ComboBoxItem>1</ComboBoxItem>
                         <ComboBoxItem>2</ComboBoxItem>
@@ -65,10 +97,11 @@
                         <ComboBoxItem>5</ComboBoxItem>
                     </ComboBox>
                 </Grid>
-                <Grid Grid.Row="11">
+                <Grid Grid.Row="18">
                     <Label Content="Genre"/>
                 </Grid>
-                <Grid Grid.Row="12">
+                <Grid Grid.Row="19">
+                    <!--ATTENTION CA DECONNE-->
                     <ComboBox Text="Choisir un type...">
                         <ItemsControl ItemsSource = "{Binding Path = TypeList, Mode=OneWay}">
                             <ItemsControl.ItemTemplate>
@@ -78,6 +111,18 @@
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                     </ComboBox>
+                </Grid>
+                <Grid Grid.Row="20">
+                    <Label Content="Date de sortie"/>
+                </Grid>
+                <Grid Grid.Row="21">
+                    <TextBox Text="{Binding Path=ReleaseDate}"/>
+                </Grid>
+                <Grid Grid.Row="22">
+                    <Label Content="Durée de vie"/>
+                </Grid>
+                <Grid Grid.Row="23">
+                    <TextBox Text="{Binding Path=ExpectedDuration}"/>
                 </Grid>
             </Grid>
         </ScrollViewer>
