@@ -143,6 +143,9 @@ namespace GamothequeWPF.ViewModel
                 case "Statistic":
                     PageView = "StatisticView.xaml";
                     break;
+                case "TypeList":
+                    PageView = "StyleView.xaml";
+                    break;
             }
         }
 

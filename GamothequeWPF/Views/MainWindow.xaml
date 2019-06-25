@@ -27,11 +27,13 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
                 <!--<GridSplitter ResizeDirection="Rows" Grid.Row="1" Height="5" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0"/>-->
                 <Button Grid.Row="2" Command="{Binding ChangePage}" CommandParameter="Statistic">Statistique</Button>
                 <Button Grid.Row="3" Command="{Binding ChangePage}" CommandParameter="GameList">Liste des jeux</Button>
                 <Button Grid.Row="4" Command="{Binding ChangePage}" CommandParameter="NewGame">Ajouter un jeu</Button>
+                <Button Grid.Row="5" Command="{Binding ChangePage}" CommandParameter="TypeList">Liste des types</Button>
             </Grid>
         </ScrollViewer>
 
@@ -40,7 +42,10 @@
                 
             </Frame>
         </Grid>
-        <Button FontFamily="Marlett" FontSize="20" Content="3" Visibility="{Binding HideMenuButton}" Command="{Binding ChangeShowMenuButton}" Height="25" Width="25" Grid.Column="1">
+        <Button FontFamily="Marlett" FontSize="20" Content="3"
+                Visibility="{Binding HideMenuButton}"
+                Command="{Binding ChangeShowMenuButton}"
+                Height="25" Width="25" Grid.Column="1">
             <Button.Triggers>
                 <EventTrigger RoutedEvent="Button.Click">
                     <BeginStoryboard>
@@ -55,7 +60,10 @@
                 </EventTrigger>
             </Button.Triggers>
         </Button>
-        <Button FontFamily="Marlett" FontSize="20" Content="4" Visibility="{Binding Path=ShowMenuButton, Converter={StaticResource VisibleIfTrueConverter} }" Command="{Binding ChangeShowMenuButton}" Height="25" Width="25" Grid.Column="1">
+        <Button FontFamily="Marlett" FontSize="20" Content="4"
+                Visibility="{Binding Path=ShowMenuButton, Converter={StaticResource VisibleIfTrueConverter} }"
+                Command="{Binding ChangeShowMenuButton}"
+                Height="25" Width="25" Grid.Column="1">
             <Button.Triggers>
                 <EventTrigger RoutedEvent="Button.Click">
                     <BeginStoryboard>
