@@ -7,7 +7,7 @@
       xmlns:local="clr-namespace:GamothequeWPF.Views"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800" Background="White"
-      Title="StyleView">
+      Title="StyleView" ShowsNavigationUI="False">
     <Page.DataContext>
         <vm:StyleViewModel/>
     </Page.DataContext>
@@ -19,13 +19,22 @@
         <StackPanel>
             <Button Content="Ajouter" Command="{Binding AddNewType}"></Button>
             <Button Content="Enregistrer" Command="{Binding SaveType}"></Button>
-            <Button Content="Annuler" Command="{Binding GetAllType}"></Button>
+            <Button Content="Annuler" Command="{Binding CancelChange}"></Button>
         </StackPanel>
         <Grid Grid.Column="2">
             <ItemsControl ItemsSource="{Binding AllTypes, Mode=TwoWay}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <TextBox Text="{Binding Name}" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="25"/>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Button Content="[|||]" Command="{Binding DataContext.DeleteType, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}" CommandParameter="{Binding}"></Button>
+                            <StackPanel Grid.Column="2">
+                                <TextBox Text="{Binding Name}"/>
+                            </StackPanel>
+                        </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

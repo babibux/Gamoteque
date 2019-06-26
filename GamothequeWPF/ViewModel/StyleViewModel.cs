@@ -43,6 +43,7 @@ namespace GamothequeWPF.ViewModel
         public async void getAllType()
         {
             var context = await Context.GetCurrent();
+
             AllTypes = new ObservableCollection<Model.Type>(context.Type.Include(t => t.gameTypes).ThenInclude(g => g.Game).ToList());
         }
 
@@ -65,9 +66,58 @@ namespace GamothequeWPF.ViewModel
 
         public async void cancelChange()
         {
+            var context = await Context.GetCurrent();
+            var changedEntries = context.ChangeTracker.Entries()
+                .Where(x => x.State != EntityState.Unchanged).ToList();
+
+            foreach (var entry in changedEntries)
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Modified:
+                        entry.CurrentValues.SetValues(entry.OriginalValues);
+                        entry.State = EntityState.Unchanged;
+                        break;
+                    case EntityState.Added:
+                        entry.State = EntityState.Detached;
+                        break;
+                    case EntityState.Deleted:
+                        entry.State = EntityState.Unchanged;
+                        break;
+                }
+            }
             getAllType();
         }
 
         public Commandes.BaseCommand CancelChange => new Commandes.BaseCommand(cancelChange);
+
+
+        public async void addNewType()
+        {
+            var context = await Context.GetCurrent();
+
+            Model.Type newType = new Model.Type()
+            {
+                Name = "Nouveau Type"
+            };
+
+            context.Add(newType);
+            await context.SaveChangesAsync();
+            getAllType();
+        }
+
+        public Commandes.BaseCommand AddNewType => new Commandes.BaseCommand(addNewType);
+
+        public async void deleteType(Model.Type type)
+        {
+            var context = await Context.GetCurrent();
+            var typ = context.Type.Where(g => g.Id == type.Id).First();
+            context.Remove(typ);
+            await context.SaveChangesAsync();
+            getAllType();
+        }
+
+        public Commandes.BaseCommand<Model.Type> DeleteType => new Commandes.BaseCommand<Model.Type>(deleteType);
+
     }
 }
