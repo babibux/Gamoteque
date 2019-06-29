@@ -38,7 +38,7 @@
         </ScrollViewer>
 
         <Grid Grid.Column="2">
-            <Frame Source="{Binding Path=PageView, Mode=TwoWay}">
+            <Frame Source="{Binding Path=PageView, Mode=TwoWay}" NavigationUIVisibility="Hidden" >
                 
             </Frame>
         </Grid>

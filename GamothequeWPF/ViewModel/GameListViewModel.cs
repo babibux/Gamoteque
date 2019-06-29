@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Navigation;
 
 namespace GamothequeWPF.ViewModel
 {
@@ -162,7 +163,8 @@ namespace GamothequeWPF.ViewModel
 
         public Commandes.BaseCommand<string,bool> SortGame => new Commandes.BaseCommand<string,bool>(sortGame);
 
-        public Commandes.BaseCommand GetAllGames => new Commandes.BaseCommand (getAllGames);
+        public Commandes.BaseCommand GetAllGames => new Commandes.BaseCommand (getAllGames); 
+        public Commandes.BaseCommand<Game> EditGame => new Commandes.BaseCommand<Game>(editGame);
 
         public async void newGame()
         {
@@ -183,6 +185,13 @@ namespace GamothequeWPF.ViewModel
             context.Remove(game);
             await context.SaveChangesAsync();
             getAllGames();
+        }
+
+        public void editGame(Game game)
+        {
+            //Ce n'est pas la meilleur méthode mais je n'ai pas trouvé mieux par manque de temps
+            MainWindowViewModel mwvm = (MainWindowViewModel)App.Current.MainWindow.DataContext;
+            mwvm.selectGame(game);
         }
 
     }

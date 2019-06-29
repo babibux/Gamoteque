@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GamothequeWPF.Model;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -11,7 +13,13 @@ namespace GamothequeWPF.ViewModel
     {
         public GameDetailsViewModel()
         {
+            MainWindowViewModel mwvm = (MainWindowViewModel)App.Current.MainWindow.DataContext;
+            SelectedGame = mwvm.SelectedGame;
+
+            AddedTypes = new ObservableCollection<Model.Type>();
+            RemovedTypes = new ObservableCollection<Model.Type>();
             getAllGames();
+
         }
 
         public ObservableCollection<Model.Type> TypeList
@@ -27,7 +35,95 @@ namespace GamothequeWPF.ViewModel
             }
         }
 
-        public ObservableCollection<Model.Game> Name
+        public ObservableCollection<Model.Type> SelectedTypes
+        {
+            get
+            {
+                return (ObservableCollection<Model.Type>)GetProperty();
+            }
+            set
+            {
+                SetProperty(value);
+            }
+        }
+
+        public ObservableCollection<Model.Type> AddedTypes
+        {
+            get
+            {
+                return (ObservableCollection<Model.Type>)GetProperty();
+            }
+            set
+            {
+                SetProperty(value);
+            }
+        }
+
+        public Model.Type SelectedAddedType
+        {
+            get
+            {
+                return (Model.Type)GetProperty();
+            }
+            set
+            {
+                SetProperty(value);
+            }
+        }
+
+        public ObservableCollection<Model.Type> RemovedTypes
+        {
+            get
+            {
+                return (ObservableCollection<Model.Type>)GetProperty();
+            }
+            set
+            {
+                SetProperty(value);
+            }
+        }
+
+        public Model.Type SelectedRemovedType
+        {
+            get
+            {
+                return (Model.Type)GetProperty();
+            }
+            set
+            {
+                SetProperty(value);
+            }
+        }
+
+        public Model.Game SelectedGame
+        {
+            get
+            {
+                return (Model.Game)GetProperty();
+            }
+
+            set
+            {
+                SetProperty(value);
+            }
+        }
+
+        //public ObservableCollection<Model.Type> SelectedGameType
+        //{
+        //    get
+        //    {
+        //        return (ObservableCollection<Model.Type>)GetProperty();
+        //    }
+
+        //    set
+        //    {
+        //        SetProperty(value);
+        //    }
+        //}
+
+
+
+        /*public ObservableCollection<Model.Game> Name
         {
             get
             {
@@ -168,13 +264,86 @@ namespace GamothequeWPF.ViewModel
             {
                 SetProperty(value);
             }
-        }
+        }*/
 
 
         public async void getAllGames()
         {
             var context = await Context.GetCurrent();
-            TypeList = new ObservableCollection<Model.Type>(context.Type.ToList());
+            RemovedTypes = new ObservableCollection<Model.Type>();
+            AddedTypes = new ObservableCollection<Model.Type>();
+            TypeList = new ObservableCollection<Model.Type>(context.Type.Include(t => t.gameTypes).ThenInclude(g => g.Game).ToList());
+            if (SelectedGame.gameTypes != null && SelectedGame.gameTypes.Count() > 0)
+            {
+                foreach (Model.Type typ in TypeList)
+                {
+                    if (SelectedGame.gameTypes.Intersect(typ.gameTypes).Count() == 0)
+                    {
+                        RemovedTypes.Add(typ);
+                    }
+                    else
+                    {
+                        AddedTypes.Add(typ);
+                    }
+                }
+            } else
+            {
+                RemovedTypes = TypeList;
+            }
+
         }
+
+        public async void saveGame()
+        {
+            var context = await Context.GetCurrent();
+            if (SelectedGame.Id == 0)
+            {
+                context.Add(SelectedGame);
+            }
+            
+            await context.SaveChangesAsync();
+            getAllGames();
+        }
+
+        public async void removeType()
+        {
+            if (SelectedAddedType != null)
+            {
+                var context = await Context.GetCurrent();
+                GameType gt = SelectedGame.gameTypes.Where(t => t.Type == SelectedAddedType).First();
+                context.Remove(gt);
+                await context.SaveChangesAsync();
+                getAllGames();
+            }
+        }
+
+        public async void addType()
+        {
+            if (SelectedRemovedType != null)
+            {
+                var context = await Context.GetCurrent();
+                GameType gt = new GameType()
+                {
+                    Game = SelectedGame,
+                    Type = SelectedRemovedType,
+                    IdGame = SelectedGame.Id,
+                    IdType = SelectedRemovedType.Id
+                };
+                context.Add(gt);
+                await context.SaveChangesAsync();
+                getAllGames();
+            }
+            
+        }
+
+        public async void cancel()
+        {
+
+        }
+
+        public Commandes.BaseCommand SaveGame => new Commandes.BaseCommand(saveGame);
+        public Commandes.BaseCommand Cancel => new Commandes.BaseCommand(cancel);
+        public Commandes.BaseCommand AddType => new Commandes.BaseCommand(addType);
+        public Commandes.BaseCommand RemoveType => new Commandes.BaseCommand(removeType);
     }
 }

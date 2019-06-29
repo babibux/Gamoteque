@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:GamothequeWPF.ViewModel"
+      xmlns:v="clr-namespace:GamothequeWPF.Views"
         mc:Ignorable="d"
         Title="GameListView" ShowsNavigationUI="False">
     <Page.DataContext>
@@ -66,6 +67,7 @@
                                 <TextBlock Text = "{Binding Path = Name}" Width = "100" Margin = "3 5 3 5"/>
                                 <CheckBox IsEnabled="False" IsChecked = "{Binding Path = Done}" Width = "100" Margin = "0 5 3 5"/>
                                 <Button Command="{Binding DataContext.DeleteGame, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding Path=Id}">[|||]</Button>
+                                <Button Command="{Binding DataContext.EditGame, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}">Edit</Button>
                                 <ItemsControl ItemsSource="{Binding Path= gameTypes, Mode=Oneway}">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>

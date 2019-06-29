@@ -59,5 +59,10 @@ namespace GamothequeWPF
             modelBuilder.Entity<GameTextLanguage>()
                 .HasKey(gtl => new { gtl.IdGame, gtl.NameLanguage });
         }
+
+        internal object Include(Func<object, object> p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

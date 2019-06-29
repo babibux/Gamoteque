@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -74,6 +75,18 @@ namespace GamothequeWPF.ViewModel
             }
         }
 
+        public Game SelectedGame
+        {
+            get
+            {
+                return (Game)GetProperty();
+            }
+            set
+            {
+                SetProperty(value);
+            }
+        }
+
         public ObservableCollection<Model.Type> TypeList
         {
             get
@@ -119,7 +132,6 @@ namespace GamothequeWPF.ViewModel
 
         public Commandes.BaseCommand ChangeShowMenuButton => new Commandes.BaseCommand (changeShowMenuButton);
 
-
         
         public string NameNewGame {
             get;
@@ -130,11 +142,18 @@ namespace GamothequeWPF.ViewModel
             get; set;
         }
 
+        public void selectGame(Game game)
+        {
+            SelectedGame = game;
+            changePage("EditGame");
+        }
+
         public void changePage(string page)
         {
             switch(page)
             {
                 case "NewGame":
+                    SelectedGame = new Game();
                     PageView = "GameDetailsView.xaml";
                     break;
                 case "GameList":
@@ -145,6 +164,9 @@ namespace GamothequeWPF.ViewModel
                     break;
                 case "TypeList":
                     PageView = "StyleView.xaml";
+                    break;
+                case "EditGame":
+                    PageView = "GameDetailsView.xaml";
                     break;
             }
         }
