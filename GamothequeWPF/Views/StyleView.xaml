@@ -6,7 +6,7 @@
       xmlns:vm="clr-namespace:GamothequeWPF.ViewModel"
       xmlns:local="clr-namespace:GamothequeWPF.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800" Background="White"
+      d:DesignHeight="450" d:DesignWidth="800"
       Title="StyleView">
     <Page.DataContext>
         <vm:StyleViewModel/>
@@ -17,9 +17,9 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <StackPanel>
-            <Button Content="Ajouter" Command="{Binding AddNewType}"></Button>
-            <Button Content="Enregistrer" Command="{Binding SaveType}"></Button>
-            <Button Content="Annuler" Command="{Binding CancelChange}"></Button>
+            <Button Style="{StaticResource StyleButton}" Content="Ajouter" Command="{Binding AddNewType}"></Button>
+            <Button Style="{StaticResource StyleButton}" Content="Enregistrer" Command="{Binding SaveType}"></Button>
+            <Button Style="{StaticResource StyleButton}" Content="Annuler" Command="{Binding CancelChange}"></Button>
         </StackPanel>
         <Grid Grid.Column="2">
             <ItemsControl ItemsSource="{Binding AllTypes, Mode=TwoWay}">
@@ -27,10 +27,10 @@
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="25"/>
+                                <ColumnDefinition Width="50"/>
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Button Content="[|||]" Command="{Binding DataContext.DeleteType, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}" CommandParameter="{Binding}"></Button>
+                            <Button Content="X" Style="{StaticResource StyleButton}" Command="{Binding DataContext.DeleteType, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}" CommandParameter="{Binding}"></Button>
                             <StackPanel Grid.Column="2">
                                 <TextBox Text="{Binding Name}"/>
                             </StackPanel>

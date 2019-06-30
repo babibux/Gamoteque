@@ -303,6 +303,8 @@ namespace GamothequeWPF.ViewModel
             
             await context.SaveChangesAsync();
             getAllGames();
+            MainWindowViewModel mwvm = (MainWindowViewModel)App.Current.MainWindow.DataContext;
+            mwvm.changePage("GameList");
         }
 
         public async void removeType()

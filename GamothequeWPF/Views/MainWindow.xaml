@@ -6,16 +6,16 @@
         xmlns:local="clr-namespace:GamothequeWPF"
         xmlns:vm="clr-namespace:GamothequeWPF.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow">
+        Title="MainWindow" Background="LightBlue">
 
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Name="menuWidth"  Width="150px" />
-            <ColumnDefinition Width="25px" />
+            <ColumnDefinition Name="menuWidth"  Width="200px" />
+            <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         
@@ -30,22 +30,23 @@
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
                 <!--<GridSplitter ResizeDirection="Rows" Grid.Row="1" Height="5" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0"/>-->
-                <Button Grid.Row="2" Command="{Binding ChangePage}" CommandParameter="Statistic">Statistique</Button>
-                <Button Grid.Row="3" Command="{Binding ChangePage}" CommandParameter="GameList">Liste des jeux</Button>
-                <Button Grid.Row="4" Command="{Binding ChangePage}" CommandParameter="NewGame">Ajouter un jeu</Button>
-                <Button Grid.Row="5" Command="{Binding ChangePage}" CommandParameter="TypeList">Liste des types</Button>
+                <Button Style="{StaticResource StyleButton}" Grid.Row="2" Command="{Binding ChangePage}" CommandParameter="Statistic">Statistiques</Button>
+                <Button Style="{StaticResource StyleButton}" Grid.Row="3" Command="{Binding ChangePage}" CommandParameter="GameList">Liste des jeux</Button>
+                <Button Style="{StaticResource StyleButton}" Grid.Row="4" Command="{Binding ChangePage}" CommandParameter="NewGame">Ajouter un jeu</Button>
+                <Button Style="{StaticResource StyleButton}" Grid.Row="5" Command="{Binding ChangePage}" CommandParameter="TypeList">Liste des types</Button>
             </Grid>
         </ScrollViewer>
 
         <Grid Grid.Column="2">
-            <Frame Source="{Binding Path=PageView, Mode=TwoWay}" NavigationUIVisibility="Hidden" >
+            <Frame Source="{Binding Path=PageView, Mode=TwoWay}" NavigationUIVisibility="Hidden" Padding="20">
                 
             </Frame>
         </Grid>
         <Button VerticalAlignment="Top" FontFamily="Marlett" FontSize="20" Content="3"
                 Visibility="{Binding HideMenuButton}"
                 Command="{Binding ChangeShowMenuButton}"
-                Height="25" Width="25" Grid.Column="1">
+                Style="{StaticResource StyleButton}"
+                Height="40" Width="40" Grid.Column="1">
             <Button.Triggers>
                 <EventTrigger RoutedEvent="Button.Click">
                     <BeginStoryboard>
@@ -63,7 +64,8 @@
         <Button VerticalAlignment="Top"  FontFamily="Marlett" FontSize="20" Content="4"
                 Visibility="{Binding Path=ShowMenuButton, Converter={StaticResource VisibleIfTrueConverter} }"
                 Command="{Binding ChangeShowMenuButton}"
-                Height="25" Width="25" Grid.Column="1">
+                Style="{StaticResource StyleButton}"
+                Height="40" Width="40" Grid.Column="1">
             <Button.Triggers>
                 <EventTrigger RoutedEvent="Button.Click">
                     <BeginStoryboard>

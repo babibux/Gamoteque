@@ -8,8 +8,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="GameDetailsView"
-      Background="White" ShowsNavigationUI="False">
-
+      ShowsNavigationUI="False">
     <Page.DataContext>
         <vm:GameDetailsViewModel/>
     </Page.DataContext>
@@ -17,6 +16,10 @@
         <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="10,10,-10,20">
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
@@ -157,7 +160,16 @@
                 <Grid Grid.Row="23" Margin="0,0,0,10">
                     <TextBox Text="{Binding Path=SelectedGame.ExpectedDuration}"/>
                 </Grid>
-                <Grid Grid.Row="24">
+                <Grid  Grid.Row="24">
+                    <Label>Image :</Label>
+                </Grid>
+                <Grid  Grid.Row="25">
+                    <TextBox Text="{Binding Path=SelectedGame.Picture}"></TextBox>
+                </Grid>
+                <Grid  Grid.Row="26">
+                    <Image Source="{Binding Path=SelectedGame.Picture, Converter={StaticResource Base64ImageConverter}}"/>
+                </Grid>
+                <Grid Grid.Row="27">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
@@ -165,7 +177,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="1" Command="{Binding SaveGame}" Content="Sauvegarder"/>
+                    <Button Grid.Column="1" Style="{StaticResource StyleButton}" Command="{Binding SaveGame}" Content="Sauvegarder"/>
                     <!--<Button Grid.Column="3" Command="{Binding Cancel}" Content="Annuler"/>-->
                 </Grid>
             </Grid>

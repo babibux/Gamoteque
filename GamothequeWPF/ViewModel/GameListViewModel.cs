@@ -116,11 +116,10 @@ namespace GamothequeWPF.ViewModel
             //path.Text = context.DatabasePath;
             //jeu.Text = context.Game.Where(g => g.Done == true).First().Name;
             var context = await Context.GetCurrent();
-            if (AllGames == null)
-            {
+
                 AllGames = new ObservableCollection<Game>(context.Game.Include(t => t.gameTypes).ThenInclude(t => t.Type).ToList());
                 AllTypes = new ObservableCollection<Model.Type>(context.Type.Include(t => t.gameTypes).ThenInclude(g => g.Game).ToList());
-            }
+
 
             FilteredGames = AllGames;
         }

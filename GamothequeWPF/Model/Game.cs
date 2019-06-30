@@ -29,5 +29,7 @@ namespace GamothequeWPF.Model
         [InverseProperty("Game")]
         public ICollection<GameType> gameTypes { get; set; }
 
+
+
     }
 }

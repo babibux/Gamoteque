@@ -180,6 +180,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Base64ImageConverter.cs" />
     <Compile Include="Commandes\BaseCommand.cs" />
     <Compile Include="Commandes\GenericBaseCommand.cs" />
     <Compile Include="Context.cs" />
