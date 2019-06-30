@@ -13,8 +13,8 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100px"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
 
         <!--Boutons des filtres par type-->
@@ -43,15 +43,32 @@
         
         
         <Grid Grid.Column="2">
-            <TextBlock Grid.Row="1">Liste des médias</TextBlock>
-            <StackPanel>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            
+            <TextBlock>Liste des médias</TextBlock>
+            
+            <StackPanel Grid.Row="1">
+                <TextBlock Text="Trier" />
                 <ComboBox SelectedItem="{Binding SelectedSortItem}" ItemsSource="{Binding Path= SortList}"></ComboBox>
             </StackPanel>
 
 
-            <Grid>
-                <TextBlock Text = "Titre" Width = "100" Margin = "119,40,573,-30"/>
-                <TextBlock Text = "Terminer" Width = "100" Margin = "224,40,468,360"/>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="4*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text = "Titre"/>
+                <TextBlock Grid.Column="1" Text = "Terminer"/>
+                <TextBlock Grid.Column="2" Text = "Supprimer"/>
+                <TextBlock Grid.Column="3" Text = "Genre"/>
             </Grid>
 
             <Grid Grid.Row="3">
@@ -82,11 +99,11 @@
                 </ItemsControl>
             </Grid>
 
-            <Grid Margin="654,389,0,0">
+            <!--<Grid Margin="654,389,0,0">
                 <TextBox Margin="-646,-10,646,10" Text="{Binding Path= NameNewGame}"></TextBox>
                 <CheckBox Margin="-491,-10,491,10" IsChecked="{Binding Path= FinishedNewGame}"></CheckBox>
                 <Button Content="Ajouter" Command="{Binding Path=NewGame}" Margin="-452,-10,452,10"/>
-            </Grid>
+            </Grid>-->
         </Grid>
 
 

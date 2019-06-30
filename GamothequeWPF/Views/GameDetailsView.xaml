@@ -54,7 +54,7 @@
                     <Label Content="Jeu fait"/>
                 </Grid>
                 <Grid Grid.Row="5">
-                    <CheckBox Content="{Binding Path=SelectedGame.Done}"/>
+                    <CheckBox IsChecked="{Binding Path=SelectedGame.Done}"/>
                 </Grid>
                 <Grid Grid.Row="6">
                     <Label Content="Synopsis"/>
@@ -90,7 +90,8 @@
                     <Label Content="Note"/>
                 </Grid>
                 <Grid Grid.Row="17">
-                    <ComboBox Text="Choisir une note..." SelectedItem="{Binding Path=SelectedGame.Mark, Mode=TwoWay}">
+                    <ComboBox Text="Choisir une note..." SelectedIndex="{Binding Path=SelectedGame.Mark, Mode=TwoWay}">
+                        <ComboBoxItem>-</ComboBoxItem>
                         <ComboBoxItem>1</ComboBoxItem>
                         <ComboBoxItem>2</ComboBoxItem>
                         <ComboBoxItem>3</ComboBoxItem>
