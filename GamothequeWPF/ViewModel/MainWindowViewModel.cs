@@ -21,6 +21,7 @@ namespace GamothequeWPF.ViewModel
             getAllGames();
             HideMenuButton = false;
             ShowMenuButton = false;
+            changePage("Statistic");
         }
 
         //private ObservableCollection<Game> _allgames;
