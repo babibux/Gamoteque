@@ -65,7 +65,14 @@ namespace GamothequeWPF.ViewModel
             var games = context.Game.ToList();
 
             // % de jeu fait
-            AllStats.Add("Pourcentage de jeux réalisés : " + (games.Where(g => g.Done == true).Count() * 100/games.Count()) + " %");
+            if(games.Count() != 0)
+            {
+                AllStats.Add("Pourcentage de jeux réalisés : " + (games.Where(g => g.Done == true).Count() * 100 / games.Count()) + " %");
+            } else
+            {
+                AllStats.Add("Vous n'avez aucun jeu");
+            }
+            
 
 
             // Répartition des jeux par note
