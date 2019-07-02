@@ -38,7 +38,7 @@
             <DVC:Chart.Series>
                 <DVC:BarSeries  ItemsSource="{Binding GameByMarkStats}" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}">
                     <DVC:BarSeries.DependentRangeAxis>
-                        <DVC:LinearAxis Interval="1" Minimum="0" Maximum="5" Orientation="X"/>
+                        <DVC:LinearAxis Interval="1" Minimum="0" Orientation="X"/>
                     </DVC:BarSeries.DependentRangeAxis>
                 </DVC:BarSeries>
             </DVC:Chart.Series>
