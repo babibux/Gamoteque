@@ -19,10 +19,16 @@ namespace GamothequeWPF
                 return null;
 
             BitmapImage bi = new BitmapImage();
+            try
+            {
+                bi.BeginInit();
+                bi.StreamSource = new MemoryStream(System.Convert.FromBase64String(s));
+                bi.EndInit();
+            } catch
+            {
 
-            bi.BeginInit();
-            bi.StreamSource = new MemoryStream(System.Convert.FromBase64String(s));
-            bi.EndInit();
+            }
+            
 
             return bi;
         }
