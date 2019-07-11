@@ -36,5 +36,10 @@ namespace GamothequeWPF.ViewModel
             return false;
         }
 
+        protected void RaisePropertyChange(Object sender, PropertyChangedEventArgs e)
+        {
+            PropertyChanged(sender, e);
+        }
+
     }
 }

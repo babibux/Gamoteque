@@ -45,6 +45,8 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
                 <!--<Image JeSaisPasQuoiMettre="{Binding Path=Picture}" />-->
                 <Grid Grid.Row="2">
@@ -176,13 +178,16 @@
                 <Grid  Grid.Row="24">
                     <Label>Image :</Label>
                 </Grid>
-                <Grid  Grid.Row="25">
-                    <TextBox Text="{Binding Path=SelectedGame.Picture}"></TextBox>
+                <!--<Grid  Grid.Row="25">
+                    <TextBox Text="{Binding Path=SelectedGame.Picture, Mode=TwoWay}"></TextBox>
+                </Grid>-->
+                <Grid Grid.Row="26">
+                    <Button Content="Parcourir" Style="{StaticResource StyleButton}" Command="{Binding Parcourir}"></Button>
                 </Grid>
-                <Grid  Grid.Row="26">
-                    <Image Source="{Binding Path=SelectedGame.Picture, Converter={StaticResource Base64ImageConverter}}"/>
+                <Grid  Grid.Row="27">
+                    <Image Source="{Binding Path=SelectedGame.Picture, Mode=TwoWay, Converter={StaticResource Base64ImageConverter}}"/>
                 </Grid>
-                <Grid Grid.Row="27">
+                <Grid Grid.Row="28">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>

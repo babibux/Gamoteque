@@ -1,8 +1,12 @@
 ﻿using GamothequeWPF.Model;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Win32;
 using System;
+using System.Buffers.Text;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -343,9 +347,20 @@ namespace GamothequeWPF.ViewModel
 
         }
 
+        public async void parcourir()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                SelectedGame.Picture = Convert.ToBase64String(File.ReadAllBytes(openFileDialog.FileName));
+                RaisePropertyChange(this, new PropertyChangedEventArgs(null));
+            }
+        }
+
         public Commandes.BaseCommand SaveGame => new Commandes.BaseCommand(saveGame);
         public Commandes.BaseCommand Cancel => new Commandes.BaseCommand(cancel);
         public Commandes.BaseCommand AddType => new Commandes.BaseCommand(addType);
         public Commandes.BaseCommand RemoveType => new Commandes.BaseCommand(removeType);
+        public Commandes.BaseCommand Parcourir => new Commandes.BaseCommand(parcourir);
     }
 }

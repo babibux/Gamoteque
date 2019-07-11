@@ -17,8 +17,9 @@ namespace GamothequeWPF
         {
             if (_context == null)
             {
-                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
-                _context = new Context(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "database.db"));
+                string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Gamothèque");
+                Directory.CreateDirectory(path);
+                _context = new Context(Path.Combine(path, "database.db"));
                 await _context.Database.MigrateAsync();
             }
 
